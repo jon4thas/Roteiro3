@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block titulo %}Relatório por Categoria - StockSys{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/list.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="container-listagem">
+    <div class="header">
+        <h2>Relatório: Produtos por Categoria</h2>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Categoria</th>
+                <th>Quantidade de Produtos</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in dados %}
+            <tr>
+                <td>{{ item.categoria }}</td>
+                <td>
+                    {% if item.quantidade == 1 %}
+                        1 produto
+                    {% else %}
+                        {{ item.quantidade }} produtos
+                    {% endif %}
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="2" style="text-align: center;">Nenhuma categoria cadastrada.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
